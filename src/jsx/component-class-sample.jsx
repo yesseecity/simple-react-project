@@ -1,35 +1,18 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from "react-router-dom";
 
 export class YourCalss extends React.Component {
   constructor(props) {
     // console.log('Lifecycle - constructor')
     super(props);
-    this.state = {};
-  }
-  componentWillReceiveProps() {
-    // in React 17.0 well remove this method
-    // console.log('Lifecycle - componentWillReceiveProps');
-  }
-  componentWillMount() {
-    // in React 17.0 well remove this method
-    // console.log('Lifecycle - componentWillMount');
+    this.state = {'paramA': 1, 'paramB': 1};
   }
   componentDidMount() {
     // console.log('Lifecycle - componentDidMount');
   }
   componentDidUpdate() {
     // console.log('Lifecycle - componentDidUpdate');
-  }
-  componentWillUnmount() {
-    // in React 17.0 well remove this method
-    // console.log('Lifecycle - componentDidUpdate');
-  }
-  getDerivedStateFromProps() {
-    // console.log('Lifecycle - getDerivedStateFromProps'); 
-  }
-  getSnapshotBeforeUpdate() {
-    // console.log('Lifecycle - getSnapshotBeforeUpdate'); 
   }
   UNSAFE_componentWillReceiveProps() {
     // console.log('Lifecycle - UNSAFE_componentWillReceiveProps');
@@ -69,10 +52,48 @@ export class YourCalss extends React.Component {
     params.append('user',JSON.stringify(body))
     axios.post('http://httpbin.org/post', params);
   }
+
+  buttonAClick(mode) {
+    switch(mode) {
+      case 'plus':
+        this.setState({paramA: this.state.paramA+1 });
+        break;
+      case 'minus':
+        this.setState({paramA: this.state.paramA-1 });
+        break;
+    }
+  }
+
+  buttonBClick(mode) {
+    switch(mode) {
+      case 'plus':
+        this.setState({paramB: this.state.paramB+1 });
+        break;
+      case 'minus':
+        this.setState({paramB: this.state.paramB-1 });
+        break;
+    }
+  }
   render() {
     // console.log('Lifecycle - render')
     return (
-      <h1>Hello</h1>
+      <>
+      <h1>Hello, this is sample for Class Obj</h1>
+      <div>
+        <h4>param A: <span>{this.state.paramA}</span></h4>
+        <button onClick={()=>{this.buttonAClick('plus')}}>+</button>
+        <button onClick={()=>{this.buttonAClick('minus')}}>-</button>
+      </div>
+      
+      <div>
+        <h4>param B: <span>{this.state.paramB}</span></h4>
+    
+        <button onClick={()=>{this.buttonBClick('plus')}}>+</button>
+        <button onClick={()=>{this.buttonBClick('minus')}}>-</button>
+      </div>
+      <br />
+      <Link to="/func">example of function</Link>
+      </>
     );
   }
 }
