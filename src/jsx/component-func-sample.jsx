@@ -1,8 +1,11 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios';
+import {ThemeContext} from './context/theme.jsx';
 
 export function FunctionName() {
+  const theme = useContext(ThemeContext);
+
   const [userInfo, setUserInfo] = useState({
     name: 'Mark',
     phone: '0912123123'
@@ -14,6 +17,8 @@ export function FunctionName() {
 
   useEffect(()=> {
     console.log('Initial;')
+
+    console.log('theme : ', theme)
   }, []);
 
   useEffect(()=> {
@@ -46,6 +51,7 @@ export function FunctionName() {
     }
   }
 
+  // In return obj, <> is Fragment
   return (
     <>
     <h1>Hello, this is sample for Function Obj</h1>

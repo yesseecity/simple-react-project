@@ -10,7 +10,6 @@ module.exports = {
     output: {
         filename: './js/[name].bundle.js',
         path: path.resolve(__dirname, dist),
-        // publicPath: '/'
     }, 
     //將loader的設定寫在module的rules屬性中
     module: {
@@ -22,36 +21,18 @@ module.exports = {
                 use: { 
                     loader: 'babel-loader', 
                     options: { 
-                        presets: ['@babel/preset-react', '@babel/preset-env'] 
+                        presets: [
+                            '@babel/preset-react',
+                            '@babel/preset-env',
+                            { 'plugins': ['@babel/plugin-proposal-class-properties']}
+                        ] 
                     } 
                 } 
             },
-            // {
-            //     test: /\.css$/,
-            //     loader: ['style-loader', 'css-loader'],
-            // },
-            // {
-            //     test: /\.scss$/,
-            //     loader: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'sass-loader'],
-            // },
             {
                 test: /\.scss$/,
                 loader: ['style-loader', 'css-loader', 'sass-loader'],
-            },
-            // {
-            //     test: /\.(scss)$/,
-            //     use: [
-            //       {
-            //         loader: 'css-loader',
-            //         options: {
-            //             modules: { localIdentName: '[name]__[local]___[hash:base64:5]' },
-            //         },
-            //       },
-            //       {
-            //         loader: 'sass-loader',
-            //       },
-            //     ],
-            // }
+            }
 
         ]
     },
@@ -62,7 +43,7 @@ module.exports = {
         historyApiFallback: true,
         port: 8080
     },
-    plugins: [
+    plugins: [ 
         new CopyPlugin([
             // 這次的例子中copy to的目標path會基於output.path的路徑之下
             {

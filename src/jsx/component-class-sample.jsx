@@ -1,15 +1,23 @@
 import React from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import {ThemeContext} from './context/theme.jsx';
 
 export class YourCalss extends React.Component {
+  static contextType = ThemeContext;
   constructor(props) {
     // console.log('Lifecycle - constructor')
     super(props);
+
+    console.log('props.theme: ', this.props.theme);
+    console.log('props.member: ', this.props.member);
+    console.log('props.win: ', this.props.win);
     this.state = {'paramA': 1, 'paramB': 1};
+
   }
   componentDidMount() {
-    // console.log('Lifecycle - componentDidMount');
+    console.log('Lifecycle - componentDidMount');
+    console.log('contxt: ', this.context);
   }
   componentDidUpdate() {
     // console.log('Lifecycle - componentDidUpdate');
@@ -21,7 +29,7 @@ export class YourCalss extends React.Component {
     // console.log('Lifecycle - UNSAFE_componentDidUpdate');
   }
   UNSAFE_componentWillUnmount() {
-    // console.log('Lifecycle - UNSAFE_componentWillUnmount');
+    // console.log('Lifecycle - UNSAFE_componentWillUnmount'); Z
   }
   apiAxiosGet() {
     axios.get('http://httpbin.org/get')
@@ -92,6 +100,12 @@ export class YourCalss extends React.Component {
         <button onClick={()=>{this.buttonBClick('minus')}}>-</button>
       </div>
       <br />
+      <ThemeContext.Consumer>
+        {(props) => {
+          return <p>ThemeContext value: <span>{props}</span></p>
+        }}
+      </ThemeContext.Consumer>
+      
       <Link to="/func">example of function</Link>
       </>
     );
