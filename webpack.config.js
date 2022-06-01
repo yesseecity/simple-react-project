@@ -45,6 +45,7 @@ module.exports = {
       directory: path.join(__dirname, './dist'),
     },
     historyApiFallback: true,
+    open: true,
     port: 8080
   },
   plugins: [ 

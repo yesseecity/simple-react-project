@@ -10,15 +10,15 @@ const H2o = styled.h1` // => Define  <h1> style，name: H2o
 
 
 export function Main() {
-    useEffect(()=>{
-      
-    },[]);
-    return (
-        <>
-            <h1 className="h1"> This is Sample React Page </h1>
-            <div className="">
-                <H2o>This line is styled-components </H2o>
-            </div>
-        </>
-    );
+  useEffect(()=>{
+
+  },[]);
+  return (
+    <div className="wrapper main">
+      <h1 className="h1"> This is Sample React Page </h1>
+      <div className="">
+        <H2o>This line is styled-components </H2o>
+      </div>
+    </div>
+  );
 }
